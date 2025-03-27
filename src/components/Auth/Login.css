@@ -1,0 +1,172 @@
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    box-sizing: border-box;
+  }
+
+/* Contenedor principal */
+.login-form-container {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  /* Tarjeta del formulario */
+  .login-form-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 2rem;
+    max-width: 28rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  /* Título del formulario */
+  .login-form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .login-form-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 0.5rem;
+  }
+  
+  .login-form-subtitle {
+    color: #4a5568;
+  }
+  
+  /* Campos del formulario */
+  .login-form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #4a5568;
+  }
+  
+  .login-form-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  
+  .login-form-input:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+  }
+  
+  /* Opciones adicionales */
+  .login-form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-form-remember {
+    display: flex;
+    align-items: center;
+  }
+  
+  .login-form-remember input {
+    margin-right: 0.5rem;
+  }
+  
+  .login-form-forgot {
+    color: #4299e1;
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+  
+  .login-form-forgot:hover {
+    text-decoration: underline;
+  }
+  
+  /* Botón de submit */
+  .login-form-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #4299e1;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-form-button:hover {
+    background-color: #3182ce;
+  }
+  
+  .login-form-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  /* Spinner */
+  .login-form-spinner {
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+  }
+  
+  /* Enlace de registro */
+  .login-form-register {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: #4a5568;
+  }
+  
+  .login-form-register-link {
+    color: #4299e1;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  .login-form-register-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Mensaje de error */
+  .login-form-error {
+    color: #e53e3e;
+    background-color: #fff5f5;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #fed7d7;
+  }
+  
+  /* Animaciones */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }

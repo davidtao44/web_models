@@ -1,32 +1,16 @@
 // src/App.jsx
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import { ChatProvider } from './context/ChatContext';
-import Layout from './components/Layout/Layout';
-import Login from './components/Auth/Login';
-import Register from './components/Auth/Register';
-import ChatWindow from './components/Chat/ChatWindow';
-import './App.css'; 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Login from './components/Auth/Login'
 
-const App = () => {
+function App() {
   return (
     <Router>
-      <AuthProvider>
-        <ChatProvider>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Navigate to="/chat" replace />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/chat" element={<ChatWindow />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-              
-            </Routes>
-          </Layout>
-        </ChatProvider>
-      </AuthProvider>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<h1>Página de Inicio</h1>} />
+      </Routes>
     </Router>
-  );
-};
+  )
+}
 
-export default App;
+export default App
