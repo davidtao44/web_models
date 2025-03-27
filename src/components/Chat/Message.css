@@ -1,0 +1,59 @@
+/* src/components/Chat/Message.css */
+.message {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 70%;
+    word-wrap: break-word;
+  }
+  
+  .user-message {
+    align-self: flex-end;
+    background-color: #007bff;
+    color: white;
+    margin-left: auto;
+  }
+  
+  .ai-message {
+    align-self: flex-start;
+    background-color: #e9ecef;
+    color: #333;
+    margin-right: auto;
+  }
+  
+  .message-content {
+    margin-bottom: 5px;
+  }
+  
+  .message-timestamp {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    text-align: right;
+  }
+  
+  .loading-dots {
+    display: flex;
+    padding: 10px 0;
+  }
+  
+  .loading-dots div {
+    width: 8px;
+    height: 8px;
+    margin: 0 3px;
+    background-color: #333;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+  }
+  
+  .loading-dots div:nth-child(1) {
+    animation-delay: -0.32s;
+  }
+  
+  .loading-dots div:nth-child(2) {
+    animation-delay: -0.16s;
+  }
+  
+  @keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
+  }

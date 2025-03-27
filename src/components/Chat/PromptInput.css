@@ -1,0 +1,27 @@
+/* src/components/Chat/PromptInput.css */
+.prompt-input {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .prompt-input input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+  }
+  
+  .prompt-input button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .prompt-input button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
