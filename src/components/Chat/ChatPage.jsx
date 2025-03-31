@@ -111,11 +111,11 @@ const ChatPage = () => {
         
         <div className="user-info">
           <div className="user-details">
-            <span className="user-name">{currentUser?.name}</span>
-            <span className="user-email">{currentUser?.email}</span>
+            <span className="user-name">{currentUser?.name || 'Usuario'}</span>
+            <span className="user-email">{currentUser?.email || 'correo@ejemplo.com'}</span>
           </div>
           <button className="logout-button" onClick={handleLogout}>
-            Cerrar sesion
+            Cerrar sesión
           </button>
         </div>
       </div>
