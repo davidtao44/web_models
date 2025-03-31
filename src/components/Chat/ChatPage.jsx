@@ -90,7 +90,7 @@ const ChatPage = () => {
     <div className="chat-container">
       <div className="chat-sidebar">
         <div className="sidebar-header">
-          <img src="../../public/logos/TECON.png" alt="Logo TECON" className="sidebar-logo" />
+          <img src="/logos/TECON.PNG" alt="Logo TECON" className="sidebar-logo" />
           <h2>Chat AI</h2>
         </div>
         
