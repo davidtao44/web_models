@@ -15,7 +15,7 @@ const ChatPage = () => {
   
   const models = [
     { id: 'llama-3.2-3b', name: 'Llama 3.1' },
-    { id: 'deepseek-r1:14b', name: 'DeepSeek R1 14B' },
+    { id: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-14B', name: 'DeepSeek R1 14B' },
     // { id: 'qwq:latest', name: 'QWQ' }, usa 19GB de RAM
     { id: 'gemma3:12b', name: 'Gemma 12B' },
   ];
