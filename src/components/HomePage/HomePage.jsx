@@ -1,9 +1,19 @@
 // src/components/HomePage/HomePage.jsx
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react'; // Add this import
+import { useAuth } from '../../context/AuthContext'; // Add this import
 import './HomePage.css';
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  
+  // Redirect to chat if user is already logged in
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/chat');
+    }
+  }, [currentUser, navigate]);
 
   return (
     <div className="home-page">

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { authService } from '../../services/api';
 import './Auth.css';
 
 const Register = () => {
@@ -34,11 +35,22 @@ const Register = () => {
         throw new Error('Las contraseñas no coinciden');
       }
       
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log('Datos de registro:', formData);
+      // Send registration data to backend
+      const { confirmPassword, ...registrationData } = formData;
+      const response = await authService.register(registrationData);
+      
+      // Store token in localStorage
+      localStorage.setItem('token', response.data.access_token);
+      
+      // Redirect to login page
       navigate('/login');
     } catch (err) {
-      setError(err.message || 'Error en el registro');
+      // Handle API errors
+      if (err.response && err.response.data) {
+        setError(err.response.data.detail || 'Error en el registro');
+      } else {
+        setError(err.message || 'Error en el registro');
+      }
     } finally {
       setIsLoading(false);
     }

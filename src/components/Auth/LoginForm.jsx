@@ -1,13 +1,24 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Auth.css';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginForm = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth(); // Add this line to use the login function from context
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,16 +26,28 @@ const Login = () => {
     setError('');
     
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      if (!email || !password) {
+      if (!formData.email || !formData.password) {
         throw new Error('Por favor completa todos los campos');
       }
       
-      console.log('Datos de login:', { email, password });
-      navigate('/');
+      // Use the login function from AuthContext instead of direct API call
+      await login({
+        email: formData.email,
+        password: formData.password
+      });
+      
+      console.log('Login successful, navigating to /chat');
+      
+      // Redirect to chat page
+      navigate('/chat');
     } catch (err) {
-      setError(err.message || 'Error al iniciar sesión');
+      // Handle API errors
+      console.error('Login error:', err);
+      if (err.response && err.response.data) {
+        setError(err.response.data.detail || 'Error al iniciar sesión');
+      } else {
+        setError(err.message || 'Error al iniciar sesión');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -34,8 +57,8 @@ const Login = () => {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h1 className="auth-title">Bienvenido de vuelta</h1>
-          <p className="auth-subtitle">Ingresa a tu cuenta para continuar</p>
+          <h1 className="auth-title">Iniciar Sesión</h1>
+          <p className="auth-subtitle">Bienvenido de nuevo</p>
         </div>
 
         {error && <div className="auth-error">{error}</div>}
@@ -46,8 +69,9 @@ const Login = () => {
             <input
               type="email"
               id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               className="auth-input"
               placeholder="tu@email.com"
               disabled={isLoading}
@@ -59,25 +83,23 @@ const Login = () => {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
               className="auth-input"
               placeholder="••••••••"
               disabled={isLoading}
             />
           </div>
 
-          <button  onClick={() => navigate('/chat')} type="submit" disabled={isLoading} className="auth-button">
+          <button type="submit" disabled={isLoading} className="auth-button">
             {isLoading ? (
-              <>
-                <svg className="auth-spinner w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Procesando...
-              </>
+              <div className="button-content">
+                <div className="modern-spinner"></div>
+                <span>Iniciando sesión...</span>
+              </div>
             ) : (
-              'Iniciar sesión'
+              'Iniciar Sesión'
             )}
           </button>
         </form>
@@ -90,4 +112,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;
