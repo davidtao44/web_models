@@ -10,8 +10,28 @@ const ChatPage = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedModel, setSelectedModel] = useState('llama3');
+  const [selectedModel, setSelectedModel] = useState('llama-3.2-3b'); // Updated default model
   const messagesEndRef = useRef(null);
+  
+  // Add local user state as fallback
+  const [localUser, setLocalUser] = useState(null);
+  
+  // Try to get user from localStorage if currentUser is null
+  useEffect(() => {
+    if (!currentUser) {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        try {
+          setLocalUser(JSON.parse(storedUser));
+        } catch (e) {
+          console.error("Error parsing stored user:", e);
+        }
+      }
+    }
+  }, [currentUser]);
+  
+  // Use either currentUser from context or localUser from localStorage
+  const userToDisplay = currentUser || localUser;
   
   const models = [
     { id: 'llama-3.2-3b', name: 'Llama 3.1' },
@@ -86,6 +106,13 @@ const ChatPage = () => {
       .map((line, i) => <p key={i}>{line}</p>);
   };
 
+  // Add this useEffect to log the current user for debugging
+  useEffect(() => {
+    console.log("Current user from context:", currentUser);
+    console.log("Local user from storage:", localUser);
+    console.log("User to display:", userToDisplay);
+  }, [currentUser, localUser, userToDisplay]);
+
   return (
     <div className="chat-container">
       <div className="chat-sidebar">
@@ -111,8 +138,8 @@ const ChatPage = () => {
         
         <div className="user-info">
           <div className="user-details">
-            <span className="user-name">{currentUser?.name || 'Usuario'}</span>
-            <span className="user-email">{currentUser?.email || 'correo@ejemplo.com'}</span>
+            <span className="user-name">{userToDisplay?.name || 'Usuario'}</span>
+            <span className="user-email">{userToDisplay?.email || 'correo@ejemplo.com'}</span>
           </div>
           <button className="logout-button" onClick={handleLogout}>
             Cerrar sesión

@@ -14,82 +14,81 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkUserLoggedIn = async () => {
       const token = localStorage.getItem('token');
-      
       if (token) {
         try {
-          const response = await userService.getCurrentUser();
+          // Fetch user data
+          const response = await authService.getCurrentUser();
+          console.log("User data from API:", response.data);
           setCurrentUser(response.data);
         } catch (err) {
-          console.error('Error fetching user data:', err);
-          // If token is invalid, clear it
-          authService.logout();
+          console.error("Error fetching user data:", err);
+          localStorage.removeItem('token');
         }
       }
-      
       setLoading(false);
     };
-    
+
     checkUserLoggedIn();
   }, []);
 
-  // Login function
   const login = async (credentials) => {
     try {
+      setLoading(true);
       const response = await authService.login(credentials);
-      const { access_token } = response.data;
       
-      localStorage.setItem('token', access_token);
-      
-      // Fetch user data
-      const userResponse = await userService.getCurrentUser();
-      const userData = userResponse.data;
-      
-      // Set the current user in state
-      setCurrentUser(userData);
-      
-      return userData;
-    } catch (error) {
-      // Error handling
-      throw error;
-    }
-  };
-
-  // Register function
-  const register = async (userData) => {
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const response = await authService.register(userData);
+      // Store token
       localStorage.setItem('token', response.data.access_token);
       
-      // Fetch user data
-      const userResponse = await userService.getCurrentUser();
-      setCurrentUser(userResponse.data);
+      // Create a basic user object from the credentials
+      const basicUserData = {
+        name: credentials.email.split('@')[0], // Use part of email as name
+        email: credentials.email
+      };
       
-      return true;
-    } catch (err) {
-      setError(err.response?.data?.detail || 'Error en el registro');
-      return false;
+      // Store this basic user data
+      setCurrentUser(basicUserData);
+      localStorage.setItem('user', JSON.stringify(basicUserData));
+      
+      // Try to get more complete user data from API
+      try {
+        const userResponse = await authService.getCurrentUser();
+        if (userResponse.data && (userResponse.data.name || userResponse.data.email)) {
+          // If we got valid user data, update it
+          setCurrentUser(userResponse.data);
+          localStorage.setItem('user', JSON.stringify(userResponse.data));
+        }
+      } catch (userError) {
+        console.error("Error fetching user data after login:", userError);
+        // We'll still use the basic user data we created
+      }
+      
+      return basicUserData;
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error;
     } finally {
       setLoading(false);
     }
   };
 
-  // Logout function
   const logout = () => {
-    authService.logout();
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setCurrentUser(null);
   };
 
+  // Provide values
   const value = {
     currentUser,
     loading,
     error,
     login,
-    register,
     logout
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
