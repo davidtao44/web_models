@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an axios instance with base configuration
 const api = axios.create({
-  baseURL: ' https://0d41-45-171-182-144.ngrok-free.app', // Assuming FastAPI runs on port 8000
+  baseURL: 'https://0d41-45-171-182-144.ngrok-free.app', // Assuming FastAPI runs on port 8000
   headers: {
     'Content-Type': 'application/json',
   },
