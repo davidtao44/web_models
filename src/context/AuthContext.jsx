@@ -39,30 +39,20 @@ export const AuthProvider = ({ children }) => {
       // Store token
       localStorage.setItem('token', response.data.access_token);
       
-      // Create a basic user object from the credentials
-      const basicUserData = {
-        name: credentials.email.split('@')[0], // Use part of email as name
-        email: credentials.email
-      };
-      
-      // Store this basic user data
-      setCurrentUser(basicUserData);
-      localStorage.setItem('user', JSON.stringify(basicUserData));
-      
-      // Try to get more complete user data from API
+      // Fetch user data immediately after login
       try {
         const userResponse = await authService.getCurrentUser();
-        if (userResponse.data && (userResponse.data.name || userResponse.data.email)) {
-          // If we got valid user data, update it
-          setCurrentUser(userResponse.data);
-          localStorage.setItem('user', JSON.stringify(userResponse.data));
-        }
+        console.log("User data after login:", userResponse.data);
+        
+        // Store user data in state and localStorage for persistence
+        setCurrentUser(userResponse.data);
+        localStorage.setItem('user', JSON.stringify(userResponse.data));
+        
+        return userResponse.data;
       } catch (userError) {
         console.error("Error fetching user data after login:", userError);
-        // We'll still use the basic user data we created
+        throw userError;
       }
-      
-      return basicUserData;
     } catch (error) {
       console.error("Login error:", error);
       throw error;

@@ -108,7 +108,7 @@ const ChatPage = () => {
 
   // Add this useEffect to log the current user for debugging
   useEffect(() => {
-    console.log("Current user from context:", currentUser);
+    console.log("Current user in ChatPage:", currentUser);
     console.log("Local user from storage:", localUser);
     console.log("User to display:", userToDisplay);
   }, [currentUser, localUser, userToDisplay]);
