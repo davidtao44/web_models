@@ -21,7 +21,7 @@ const HomePage = () => {
       
       <div className="logo-container">
         <img 
-          src="../../public/logos/TECON.png" 
+          src="/logos/TECON.PNG" 
           alt="Logo TECON" 
         />
       </div>

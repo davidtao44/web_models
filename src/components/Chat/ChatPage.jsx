@@ -14,8 +14,10 @@ const ChatPage = () => {
   const messagesEndRef = useRef(null);
   
   const models = [
-    { id: 'llama3', name: 'Llama 3' },
-    { id: 'deepseek-r1:1.5b', name: 'DeepSeek' },
+    { id: 'llama3.1:latest', name: 'Llama 3.1' },
+    { id: 'deepseek-r1:14b', name: 'DeepSeek R1 14B' },
+    { id: 'qwq:latest', name: 'QWQ' },
+    { id: 'gemma3:12b', name: 'Gemma 12B' },
   ];
 
   useEffect(() => {
