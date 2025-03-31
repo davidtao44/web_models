@@ -98,26 +98,66 @@
   
   /* Responsive */
   @media (max-width: 768px) {
+    .home-page {
+      padding: 1.5rem;
+      min-height: 100dvh;
+    }
+  
     .home-page h1 {
-      font-size: 2.2rem;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
     }
-    
+  
     .home-page p {
-      font-size: 1.1rem;
+      font-size: 1rem;
+      padding: 0 1rem;
+      margin-bottom: 2rem;
     }
-    
+  
     .auth-buttons {
       flex-direction: column;
       gap: 1rem;
       width: 100%;
-      max-width: 300px;
+      max-width: 280px;
     }
-    
+  
     .auth-button {
       width: 100%;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
     }
-    
+  }
+  
+  @media (max-width: 480px) {
+    .home-page {
+      padding: 1rem;
+    }
+  
+    .home-page h1 {
+      font-size: 1.8rem;
+    }
+  
     .home-page img {
-      max-width: 200px;
+      max-width: 180px;
+      margin-bottom: 2rem;
     }
+  
+    .auth-button {
+      padding: 0.7rem 1.2rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+    .chat-message {
+      max-width: 90%;
+    }
+  }
+  
+  /* Asegurar que no haya espacios blancos */
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
   }
