@@ -138,8 +138,8 @@ const ChatPage = () => {
         
         <div className="user-info">
           <div className="user-details">
-            <span className="user-name">{userToDisplay?.name || 'Usuario'}</span>
-            <span className="user-email">{userToDisplay?.email || 'correo@ejemplo.com'}</span>
+            <span className="user-name">{userToDisplay?.name}</span>
+            <span className="user-email">{userToDisplay?.email}</span>
           </div>
           <button className="logout-button" onClick={handleLogout}>
             Cerrar sesión
