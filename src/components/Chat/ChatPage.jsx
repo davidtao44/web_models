@@ -115,7 +115,7 @@ const ChatPage = () => {
             <span className="user-email">{currentUser?.email}</span>
           </div>
           <button className="logout-button" onClick={handleLogout}>
-            Cerrar sesión
+            Cerrar sesion
           </button>
         </div>
       </div>
@@ -129,7 +129,7 @@ const ChatPage = () => {
           {messages.length === 0 ? (
             <div className="empty-chat">
               <h2>¡Bienvenido al Chat AI!</h2>
-              <p>Comienza una conversación con el modelo seleccionado.</p>
+              <p> Comienza una conversación con el modelo seleccionado. </p>
             </div>
           ) : (
             messages.map((msg, index) => (
